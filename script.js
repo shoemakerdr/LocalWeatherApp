@@ -1,18 +1,25 @@
 var weather = (function () {
-  var location = {
-    lat: "lat",
-    lon: "long"
+  var coord = {
+	  lat: 0,
+	  long: 0
   };
   
-  var url = "http://samples.openweathermap.org/data/2.5/weather?lat=" + 
-            location.lat + "&lon=" + location.lon + 
+  navigator.geolocation.getCurrentPosition(success);
+
+  function success(position) {
+    coord.lat = position.coords.latitude;
+    coord.long = position.coords.longitude;
+  }
+  
+  var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + 
+            coord.lat + "&lon=" + coord.long + 
             "&APPID=058e4fada3e29a7594f7a287dcad121d";
 
   var api = function() {
     var req = new XMLHttpRequest();
     req.open("GET", url, false);
     req.send(null);
-    req.responseText;
+    return JSON.parse(req.responseText);
   };
 
   return {

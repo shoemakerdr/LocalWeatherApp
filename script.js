@@ -1,28 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-  console.log("Document loaded");
-  // getUrl();
-  // // gets current location and assigns url-- calls getApi function with url
-  // function getUrl() {
-  //   console.log("getting URL");
-  //   navigator.geolocation.getCurrentPosition(success);
-  
-  //   console.log("I think I have the URL");
-  //   function success(position) {
-  //     let locUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + 
-  //                   position.coords.latitude + "&lon=" + 
-  //                   position.coords.longitude + 
-  //                   "&APPID=058e4fada3e29a7594f7a287dcad121d";
-  //     console.log("Got URL");
-  //     getApi(locUrl);
-  //   }
-  // }
-  
+
   getURL("http://freegeoip.net/json/");
   
-  // takes url and makes http request to get API JSON object-- calls render 
-  // function with object
+  // takes url string and makes http request to get new url string for API 
+  // call-- calls getAPI function with new url
   function getURL(url) {
-    console.log("getting URL");
     const req = new XMLHttpRequest();
     req.addEventListener("load", () => {
     let file = JSON.parse(req.responseText);
@@ -30,19 +12,18 @@ document.addEventListener("DOMContentLoaded", function() {
               file.city + "," + 
               file.country_code + 
               "&APPID=058e4fada3e29a7594f7a287dcad121d";
-    console.log(apiUrl);
     getAPI(apiUrl);
   });
     req.open("GET", url, true);
     req.send();
   }
   
+  // takes url and makes http request to get API JSON object-- calls render 
+  // function with object
   function getAPI(url) {
-    console.log("getting API JSON file");
     const req = new XMLHttpRequest();
     req.addEventListener("load", () => {
     let file = JSON.parse(req.responseText);
-    console.log("got file");
     render(file);
   });
     req.open("GET", url, true);
@@ -51,17 +32,43 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // takes weather API object and renders all DOM elements
   function render(apiObj) {
-    function const city = document.getElementById("city_name");
-    city.textContent = apiObj.name;
-    const celsius = Math.round((Number(apiObj.main.temp)) - 273.15);
-    const fahrenheit = Math.round((celsius * 9 / 5) + 32);
-    const temperature = document.getElementById("temperature");
-    const celsiusElem = document.createElement("p");
-    const fahrenheitElem = document.createElement("p");
+    addCity();
+    addTemperatures();
+    
+    // renders city and country code
+    function addCity() {
+      let city = document.getElementById("city_name");
+      city.textContent = apiObj.name + ", " + apiObj.sys.country;
+    }
+    
+    // renders both celsius and fahrenheit temperature elements but only 
+    // displays celsius element
+    function addTemperatures() {
+      const tempDiv = document.getElementById("temperature");
+      const celsius = Math.round((Number(apiObj.main.temp)) - 273.15);
+      const fahrenheit = Math.round((celsius * 9 / 5) + 32);
+      function createTemperatureElement(temp, measure) {
+        const tempElement = document.createElement("p");
+        let measureElement = document.createElement("span");
+        measureElement.innerHTML = (measure === "C") ? 
+          "&#8451" :
+          "&#8457";
+         tempElement.textContent = temp;
+         tempElement.appendChild(measureElement);
+         return tempElement;
+      } 
+      tempDiv.appendChild(createTemperatureElement(celsius, "C"));
+      tempDiv.appendChild(createTemperatureElement(fahrenheit, "F"));
+    }
   }
 });
   
+  
+  
 /*
+
+Example JSON file from API
+
 {
   "coord":{"lon":-87.65,"lat":41.87},
   "weather": [

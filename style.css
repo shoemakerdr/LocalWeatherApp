@@ -1,0 +1,39 @@
+* + * {
+	margin-top: 1em;
+}
+
+body {
+	background-color: #4286f4;
+	color: white;
+	text-align: center;
+	font-size: 2em;
+}
+h1 {
+	font-size: 3em;
+}
+p {
+	border-bottom-style: solid;
+	border-color: #5e9bff;
+	border-width: 3px;
+	padding: .25em;
+	font-size;
+}
+p:hover, a:hover {
+	background-color: #5e9bff;
+	cursor: pointer;
+}
+a:link, a:visited {
+	text-decoration: none;
+	color:white;
+	border-bottom-style: solid;
+	border-color: #5e9bff;
+	border-width: 3px;
+	padding: .25em;
+}
+img {
+	background-color: #5e9bff;
+	border-style: solid;
+	border-color: #5e9bff;
+	border-width: 1em;
+	border-radius: 50%;
+}

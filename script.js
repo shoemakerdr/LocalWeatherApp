@@ -81,6 +81,8 @@ document.addEventListener("DOMContentLoaded", function() {
       iconDiv.appendChild(imageElement);
     }
   }
+
+  // binds click handler to temperature div
   function bindEvents() {
     const tempWrapper = document.getElementById("temperature");
     tempWrapper.addEventListener("click", switchTemp);
@@ -94,51 +96,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
-
-
-
-
-
-/*
-
-Example JSON file from API
-
-{
-  "coord":{"lon":-87.65,"lat":41.87},
-  "weather": [
-    {
-      "id": 803,
-      "main": "Clouds",
-      "description": "broken clouds",
-      "icon": "04d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp":289.04,
-    "pressure":1016,
-    "humidity":39,
-    "temp_min":286.15,
-    "temp_max":291.15
-  },
-  "visibility":16093,
-  "wind": {
-    "speed":4.6,"deg":110
-  },
-  "clouds": {
-    "all":75
-  },
-  "dt":1493045700,
-  "sys": {
-    "type":1,
-    "id":961,
-    "message":0.0108,
-    "country":"US",
-    "sunrise":1493031317,
-    "sunset":1493080952
-  },
-  "id":4887398,
-  "name":"Chicago",
-  "cod":200
-}
-*/

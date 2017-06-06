@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const req = new XMLHttpRequest();
     req.addEventListener("load", () => {
     let file = JSON.parse(req.responseText);
-    let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" +
+    let apiUrl = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=" +
               file.city + "," +
               file.country_code +
               "&APPID=058e4fada3e29a7594f7a287dcad121d";

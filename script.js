@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  getURL("http://freegeoip.net/json/");
+  getURL("https://cors-anywhere.herokuapp.com/http://freegeoip.net/json/");
 
   // takes url string and makes http request to get new url string for API
   // call-- calls getAPI function with new url
